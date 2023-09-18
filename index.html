@@ -635,10 +635,13 @@
 	}
   
 	// Call the fetchIP function when the page loads
-	window.addEventListener("load", fetchIP);
-  
-	// Update the time every second
-	setInterval(updateTime, 1000);
+	window.addEventListener("load", function() {
+	  // Set the initial text content of the IP and time elements
+	  document.getElementById("ip-display").textContent = "Your IP: Fetching...";
+	  updateTime(); // Update the time immediately
+	  setInterval(updateTime, 1000); // Update the time every second
+	  fetchIP(); // Fetch and display the IP
+	});
   </script>  
 </body>
 		
