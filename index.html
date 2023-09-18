@@ -588,7 +588,8 @@
     			align-items: center;
   		}
 </style>
-
+<div id="ip-display">Your IP: </div>
+<div id="time-display">Current time: </div>
 <footer id="footer">
   	<hr>
   	<div class="box-container">
@@ -606,6 +607,39 @@
     	</div>
   	</div>
 </footer>
+<script>
+	// Function to fetch IP information
+	async function fetchIP() {
+	  try {
+		const response = await fetch("https://api64.ipify.org?format=json");
+		const data = await response.json();
+		const ipAddress = data.ip;
+  
+		// Display the IP address
+		document.getElementById("ip-display").textContent = "Your IP: " + ipAddress;
+	  } catch (error) {
+		console.error("Error fetching IP:", error);
+	  }
+	}
+  
+	// Function to update the time
+	function updateTime() {
+	  const currentTime = new Date();
+	  const hours = currentTime.getHours().toString().padStart(2, "0");
+	  const minutes = currentTime.getMinutes().toString().padStart(2, "0");
+	  const seconds = currentTime.getSeconds().toString().padStart(2, "0");
+	  const timeString = `${hours}:${minutes}:${seconds}`;
+  
+	  // Display the current time
+	  document.getElementById("time-display").textContent = "Current time: " + timeString;
+	}
+  
+	// Call the fetchIP function when the page loads
+	window.addEventListener("load", fetchIP);
+  
+	// Update the time every second
+	setInterval(updateTime, 1000);
+  </script>  
 </body>
 		
 
